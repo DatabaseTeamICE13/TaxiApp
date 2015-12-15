@@ -27,7 +27,7 @@ session_start();
 	<li> Driver </li>
 	</ul>
       <form class="form-signin" id="sign_in_form" method="POST" onsubmit="UserChecker(document)">
-        <div style="padding-top:200px;"><h2 style="display:inline; font-family:serif; padding-right:50px;" class="form-signin-heading" style="alignment">Taxi-App</h2><img src="images/car.gif"  height="50" width="50"></div>
+        <div style="padding-top:200px;"><h2 style="display:inline; font-family:serif; padding-right:50px;" class="form-signin-heading" style="alignment">Taxi-App</h2><img src="Images/car.gif"  height="50" width="50"></div>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="text" id="userId" class="form-control" placeholder="UserId" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
@@ -44,6 +44,6 @@ session_start();
       </form>
 
     </div> <!-- /container -->
-	<div class="taxiCar"><img src="images/taxi2.jpg"  height="100%" width="100%"></div>
+	<div class="taxiCar"><img src="Images/taxi2.jpg"  height="100%" width="100%"></div>
   </body>
 </html>
