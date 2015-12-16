@@ -49,21 +49,12 @@ session_start();
 	<script>
 	var map;
 	var markers = [];
-	var geoLocation; //geo location of the customer
+	var gLocation; //geo location of the customer
 	var labels ='Taxi';
-	var blueCoords = [
-    {lat: 6.933279, lng: 79.848905},
-	{lat: 6.933279, lng: 79.849905},
-	{lat: 6.932279, lng: 79.849905},
-	{lat: 6.932279, lng: 79.848905}
-	];
-	function getLocation() {
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(showPosition);
-		} else { 
-			geoLocation = "Geolocation is not supported by this browser.";
-		}
-	}
+	var startImage = 'Images/start3.png';
+	var endImage = 'Images/end.png';
+	var markerStart;
+	var markerEnd;
 	function CenterControl(controlDiv, map, center) {
 	  // We set up a variable for this since we're adding event listeners later.
 	  var control = this;
@@ -99,8 +90,7 @@ session_start();
 	  // Set up the click event listener for 'Center Map': Set the center of the map
 	  // to the current center of the control.
 	  bookTaxiUI.addEventListener('click', function() {
-		var currentCenter = control.getCenter();
-		map.setCenter(currentCenter);
+		  window.location.assign('hireInfo.php?startLat='+markerStart.getPosition().lat()+'&startLong='+markerStart.getPosition().lng()+'endLat='+markerEnd.getPosition().lat()+'&endLong='+markerEnd.getPosition().lng());
   });
 
   // Set up the click event listener for 'Set Center': Set the center of the
@@ -110,11 +100,6 @@ session_start();
     control.setCenter(newCenter);
   });
 }
-
-	function showPosition(position) {
-		geoLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-		addMarker(geoLocation);
-	}
 	function initialize() {
 	  var mapProp = {
 		center:new google.maps.LatLng(6.933279, 79.849905),
@@ -127,46 +112,51 @@ session_start();
 	  centerControlDiv.index = 1;
 	  centerControlDiv.style['padding-top'] = '10px';
 	  map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
-	  new google.maps.Polygon({
-		map: map,
-		paths: blueCoords,
-		strokeColor: '#0000FF',
-		strokeOpacity: 0.8,
-		strokeWeight: 2,
-		fillColor: '#0000FF',
-		fillOpacity: 0.35,
-		draggable: true,
-		geodesic: false
-	  });
-	}
-	function showLocation(){
-	  addMarker(new google.maps.LatLng(6.933279, 79.849905));
-	  //addMarker(new google.maps.LatLng(6.933279, 79.239905));
-	  //addMarker(new google.maps.LatLng(6.933279, 73.849905));
-	  //addMarker(new google.maps.LatLng(5.933279, 79.849905));
+		var infowindowStart = new google.maps.InfoWindow({
+			content: 'Start'
+		});
+		var infowindowEnd = new google.maps.InfoWindow({
+			content: 'End'
+		});
+		markerStart = new google.maps.Marker({
+			position: new google.maps.LatLng(6.913279, 79.899905),
+			map: map,
+			icon: startImage,
+			draggable: true
+		  });
+		   markerStart.addListener('click', function() {
+			infowindowStart.open(map, markerStart);
+			});
+		markerEnd = new google.maps.Marker({
+			position: new google.maps.LatLng(6.933279, 79.849905),
+			map: map,
+			icon: endImage,
+			draggable: true
+		  });
+		  markerEnd.addListener('click', function() {
+			infowindowEnd.open(map, markerEnd);
+			});
+		  markers.push(markerStart);
+		  markers.push(markerEnd);
 	}
 	function addMarker(location) {
 		  var marker = new google.maps.Marker({
 			position: location,
 			map: map,
-			icon: {
-			path: Images/car.gif,
-			scale: 10
-			},
-			draggable: true,
+			icon: image,
+			draggable: true
 		  });
 	  markers.push(marker);
 	}
 	
 	
 	google.maps.event.addDomListener(window, 'load', initialize);
-	google.maps.event.addDomListener(window, 'load', showLocation);
 	</script>
    </head>
 
   <body onload="getLocation()">
 	
-	<nav class="navbar navbar-default navbar-static-top">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -175,36 +165,23 @@ session_start();
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>	
+            <img src="images/car.gif"  height="50" width="50">
+          <a class="navbar-brand" href="#">Taxi-App Welcome <?php echo $_SESSION['name'] ?></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="about.php">About</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li>
-            <li><a href="../navbar-fixed-top/">Fixed top</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right" action="footer.php">
+            <button type="submit" class="btn btn-danger">Sign Out</button>
+          </form>
+        </div><!--/.navbar-collapse -->
       </div>
     </nav>
 	
-	<div id="googleMap" style="width:1500px;height:650px; margin:auto; border: 3px solid #73AD21; padding: 10px;"></div>
+	<div id="googleMap" style="width:1300px;height:550px; margin:auto; border: 3px solid #73AD21; padding: 10px;"></div>
 	
 
   </body>
