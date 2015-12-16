@@ -10,7 +10,7 @@
         if($exist > 0){ // if there are returning rows
             while($row = mysql_fetch_array($query)){ // display all rows  from query
                 $table_password = $row['password'];
-                @$table_name= raw['name'];
+                @$table_name= $raw['name'];
             }
             if($password == $table_password){
                     $_SESSION['userId'] = $user;
