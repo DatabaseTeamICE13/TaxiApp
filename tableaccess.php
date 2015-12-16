@@ -20,21 +20,45 @@ function getY($driverId){
 
 function getHireRequests(){
     $requests = array();
-    $query = mysql_query("SELECT request_id, start_loc_long, start_loc_lat, destination_long, destination_lat, date, time, num_of_passengers, max_bid, contact_no FROM Hire_request WHERE request_id NOT IN (SELECT request_id FROM tour)");
+    $query = mysql_query("SELECT request_id, start_loc_long, start_loc_lat, destination_long, destination_lat, date, time, num_of_passengers, max_bid, contact_no FROM Hire_request WHERE request_id NOT IN (SELECT request_id FROM tour) ");
+    
     while($row = mysql_fetch_array($query)){ // display all rows  from query
-		$requestRow[] = $row['request_id'];
-		$requestRow[] = $row['start_loc_long'];
-		$requestRow[] = $row['start_loc_lat'];
-		$requestRow[] = $row['destination_long'];
-		$requestRow[] = $row['destination_lat'];
-		$requestRow[] = $row['date'];
-		$requestRow[] = $row['num_of_passengers'];
-		$requestRow[] = $row['max_bid'];
-		$requestRow[] = $row['contact_no'];
+		$requestRow = array();
+		$requestRow[0] = $row['request_id'];
+		$requestRow[1] = $row['start_loc_long'];
+		$requestRow[2] = $row['start_loc_lat'];
+		$requestRow[3] = $row['destination_long'];
+		$requestRow[4] = $row['destination_lat'];
+		$requestRow[5] = $row['date'];
+		$requestRow[6] = $row['time'];
+		$requestRow[7] = $row['num_of_passengers'];
+		$requestRow[8] = $row['max_bid'];
+		$requestRow[9] = $row['contact_no'];
 		 
-        $requests= $row['yCornidates'];
-            }
+        $requests[]= $requestRow;
+        
+       
+    }
     return $requests;
+}
+
+function getAvailability($driverId){
+    $status = "";
+    $query = mysql_query("SELECT availability FROM `driver` WHERE driver_id = '$driverId'");
+    $row = mysql_fetch_array($query);
+    if($row['availability'] == 1){
+		$status = "ON";
+    }else{
+	   $status = "OFF";
+    }
+
+    return $status;
+}
+
+function changeAvailability($driverId){
+    $status = "";
+    $query = mysql_query("UPDATE driver SET availability = availability XOR 1 WHERE  driver_id = '$driverId'");
+    
 }
 
 

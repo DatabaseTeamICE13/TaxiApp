@@ -58,51 +58,16 @@
       </div>
     </nav>
     
-    <div class="container">
-            <div class="jumbotron">
-                <form action="CallFunction.php?document.getElementById("myTable").rows[0].cells[0]" method="post">
-                    <br>
-                    <br>
-                    <br>
-                    <div class="panel panel-primary">
-                    <div class="panel-heading">Hire Request</div>
-                    <table class="table table-striped">
-						<th>Hire ID</th>
-						<th>Date</th>
-                        <th>Time</th>
-                        <th>Start </th>
-                        <th>Destination</th>
-                        <th>No of Passengers</th>
-						<?php
-							$hireRequests =getHireRequests();
-							
-							foreach ($hireRequests as $request) {
-						?>
-								
-									<tr>
-										<td><?php echo $request[0] ?></td>
-										<td><?php echo $request[5] ?></td>
-										<td><?php echo $request[6] ?></td>
-										<td><?php echo $request[1]," and " ,$request[2] ?></td>
-										<td><?php echo $request[3]," and " ,$request[4]  ?></td>
-										<td><?php echo $request[7] ?></td>
-										<td><input type="submit" value="   Bid  "/></td>
-										
-										
-									 </tr>
-									
-						
-						<?php
-							}
-						?>
-                    
-                    </table>
-                    </div>
-                    <br>
-                        </div>
-                </form>
-            </div>
-        </div>
+    <div class="container" style="width:250px;">
+    <form method="POST" action="">
+        <div style="padding-top:200px;"></div>
+        Hire ID <input type="text" name="hireId" id="hireId" class="form-control" readonly/>
+        Bid<input type="text" name="bid" id="bid" class="form-control"/>
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Bid</button>
+          
+      </form>
+     </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

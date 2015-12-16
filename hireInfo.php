@@ -47,7 +47,7 @@ session_start();
 	<br><br><br>
 	<div class="row">
     <div class="col-md-2 col-md-offset-5">
-		<form action="" method="POST" class="form-signin">
+		<form action="addRequestData.php" method="POST" class="form-signin">
 			 <div class="form-group">
             <label for="exampleInputEmail1">Date</label>
             <input type="date" class="form-control" name="date">
