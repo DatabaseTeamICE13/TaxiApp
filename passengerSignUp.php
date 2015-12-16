@@ -18,6 +18,6 @@ if($password != $repeatPassword){
 }
 
 else {
-    $insertQuery = "INSERT INT0 passenger ('name','contact_no','password') VALUES ($name,$contactNo,$password)";
+    $insertQuery = "INSERT INTO `taxiapp`.`passenger` (`contact_no`, `name`, `password`) VALUES ('$contactNo','$name','$password')";
     $result = mysql_query($insertQuery);
 }
