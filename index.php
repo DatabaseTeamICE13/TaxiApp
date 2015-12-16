@@ -37,10 +37,10 @@ session_start();
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
           <label>
-			<a href="signup.php">Sign up as a driver</a>
+			<a href="driverSignUpForm.php">Sign up as a driver</a>
           </label>
             <label>
-            <a href="signup.php">Sign up as a Passenger</a>
+            <a href="passengerSignUpForm.php">Sign up as a Passenger</a>
             </label>
       </form>
 
