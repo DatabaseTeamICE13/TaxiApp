@@ -28,14 +28,16 @@ session_start();
 
 <body>
 <div class="container-fluid" style="align-items: center">
-    <div style="padding-top:100px;padding-left: 540px;padding-bottom: 50px">
+    <div style="padding-top:40px;padding-left: 540px;padding-bottom: 50px">
         <h2 style="display:inline; font-family:serif; padding-right:50px;" class="form-signup-heading" style="alignment">Sign up as a driver</h2>
         <img src="Images/car.gif"  height="50" width="50">
     </div>
 
     <div class="col-md-9" style="padding-left: 450px">
         <form class="form-group" id="sign_up_form" action="driverSignUp.php" method="POST">
-            <label for="name" class="control-label">Enter Your Name</label>
+            <label for="id" class="control-label">Enter Your ID</label>
+            <input type="text" name="id" id="id" class="form-control" placeholder="User ID" required autofocus>
+            <label for="name" class="control-label" style="padding-top: 20px">Enter Your Name</label>
             <input type="text" name="name" id="name" class="form-control" placeholder="Name" required autofocus>
             <label for="contactNo" class="control-label" style="padding-top: 20px">Enter Your Contact No</label>
             <input type="tel" name="contactNo" id="contactNo" class="form-control" placeholder="Contact No" required autofocus>

@@ -20,4 +20,6 @@ if($password != $repeatPassword){
 else {
     $insertQuery = "INSERT INTO `taxiapp`.`passenger` (`contact_no`, `name`, `password`) VALUES ('$contactNo','$name','$password')";
     $result = mysql_query($insertQuery);
+    Print '<script>alert("Successfully sign up!");</script>'; // prompts user
+    Print '<script>window.location.assign("index.php");</script>'; // redirects to the login page
 }
