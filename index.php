@@ -33,16 +33,19 @@ session_start();
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <label class="radio-inline"><input type="radio" name="select" value="Driver">Driver</label>
-        <label class="radio-inline"><input type="radio" name="select" checked="checked" value="Customer" >Customer</label>
+        <label class="radio-inline"><input type="radio" name="select" checked="checked" value="Customer" >Passenger</label>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me 
 			</label>
-			<label>
-			<a href="signup.php">Sign up</a>
-          </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          <label>
+			<a href="signup.php">Sign up as a driver</a>
+          </label>
+            <label>
+            <a href="signup.php">Sign up as a Passeger</a>
+            </label>
       </form>
 
     </div> <!-- /container -->
