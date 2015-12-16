@@ -180,8 +180,8 @@ session_start();
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
-	
-	<div id="googleMap" style="width:1300px;height:550px; margin:auto; border: 3px solid #73AD21; padding: 10px;"></div>
+	<br><br>
+	<div id="googleMap" style="width:1300px;height:550px; margin:auto; border: 5px solid #73AD21; padding: 15px;"></div>
 	
 
   </body>
