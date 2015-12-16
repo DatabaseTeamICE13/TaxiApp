@@ -50,6 +50,7 @@ session_start();
 	var map;
 	var markers = [];
 	var geoLocation; //geo location of the customer
+	var labels ='Taxi';
 	var blueCoords = [
     {lat: 6.933279, lng: 79.848905},
 	{lat: 6.933279, lng: 79.849905},
@@ -139,7 +140,7 @@ session_start();
 	  });
 	}
 	function showLocation(){
-	  //addMarker(new google.maps.LatLng(6.933279, 79.849905));
+	  addMarker(new google.maps.LatLng(6.933279, 79.849905));
 	  //addMarker(new google.maps.LatLng(6.933279, 79.239905));
 	  //addMarker(new google.maps.LatLng(6.933279, 73.849905));
 	  //addMarker(new google.maps.LatLng(5.933279, 79.849905));
@@ -147,14 +148,19 @@ session_start();
 	function addMarker(location) {
 		  var marker = new google.maps.Marker({
 			position: location,
-			map: map
+			map: map,
+			icon: {
+			path: Images/car.gif,
+			scale: 10
+			},
+			draggable: true,
 		  });
 	  markers.push(marker);
 	}
 	
 	
 	google.maps.event.addDomListener(window, 'load', initialize);
-	//google.maps.event.addDomListener(window, 'load', showLocation);
+	google.maps.event.addDomListener(window, 'load', showLocation);
 	</script>
    </head>
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
   <head>
@@ -75,3 +76,10 @@ function initMap() {
     </script>	
   </body>
 </html>
+=======
+<?php 
+    include "tableaccess.php";
+    echo getX("0001");
+    echo getY("0001");
+?>
+>>>>>>> faaf91bf7111a6bb069e6598f6bdeda11fad17c9
