@@ -45,26 +45,33 @@ session_start();
       </div>
     </nav>
 	<br><br><br>
-	<div class="container">
-	<div class="jumbotron">
+	<div class="row">
+    <div class="col-md-2 col-md-offset-5">
 		<form action="" method="POST" class="form-signin">
-			<label >Date</label>
+			 <div class="form-group">
+            <label for="exampleInputEmail1">Date</label>
+            <input type="date" class="form-control" name="date">
+            </div>
+             <div class="form-group">
+            <label for="exampleInputEmail1">Time</label>
+            <input type="time" name="time" class="form-control">
+            </div>
+             <div class="form-group">
+            <label for="exampleInputEmail1">No of Passengers</label>
+            <input type="number" name="noOfPassengers" class="form-control">
+            </div>
+             <div class="form-group">
+            <label for="exampleInputEmail1">Max Bid</label>
+            <input type="number" name="maxBid" class="form-control">
+            </div>
 			<br>
-			<input type="date" name="date">
-			<label>Time</label><br>
-			<input type="time" name="time">
-			<label>No of passengers</label><br>
-			<input type="number" name="noOfPassengers">
-			<label>Max bid</label><br>
-			<input type="number" name="maxBid">
-			<br>
-			<button type="submit" name="submit" class="btn btn-success" >Submit</button>
 			<input type="hidden" name="startLat" value="<?php echo $_GET['startLat'];?>">
 			<input type="hidden" name="startLong" value="<?php echo $_GET['startLong'];?>">
 			<input type="hidden" name="endLat" value="<?php echo $_GET['endLat'];?>">
 			<input type="hidden" name="endLong" value="<?php echo $_GET['endLong'];?>">
+            <button type="submit" name="submit" class="btn btn-success" >Submit</button>
 		</form>
 	</div>
-	</div>
+      </div>
   </body>
 </html>
