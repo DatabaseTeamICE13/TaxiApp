@@ -12,7 +12,7 @@ session_start();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Signin</title>
+    <title>Sign in</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -26,10 +26,10 @@ session_start();
 	<li class="active">Passenger</li>
 	<li> Driver </li>
 	</ul>
-      <form class="form-signin" id="sign_in_form" method="POST" onsubmit="UserChecker(document)">
+      <form class="form-sign" id="sign_in_form" method="POST" onsubmit="UserChecker(document)">
         <div style="padding-top:200px;"><h2 style="display:inline; font-family:serif; padding-right:50px;" class="form-signin-heading" style="alignment">Taxi-App</h2><img src="Images/car.gif"  height="50" width="50"></div>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="text" id="userId" class="form-control" placeholder="UserId" required autofocus>
+        <input type="text" id="userId" class="form-control" placeholder="User Id" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <div class="checkbox">
@@ -37,7 +37,7 @@ session_start();
             <input type="checkbox" value="remember-me"> Remember me 
 			</label>
 			<label>
-			<a href="signup.php">Sign up</a>
+			<a href="passengerSignUpForm.php">Sign up</a>
           </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
