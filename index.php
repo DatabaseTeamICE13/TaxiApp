@@ -26,12 +26,14 @@ session_start();
 	<li class="active">Passenger</li>
 	<li> Driver </li>
 	</ul>
-      <form class="form-signin" id="sign_in_form" method="POST" onsubmit="UserChecker(document)">
+      <form class="form-signin" id="sign_in_form" method="POST" onsubmit="UserChecker(document)" action="authenticateUser.php">
         <div style="padding-top:200px;"><h2 style="display:inline; font-family:serif; padding-right:50px;" class="form-signin-heading" style="alignment">Taxi-App</h2><img src="images/car.gif"  height="50" width="50"></div>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="text" id="userId" class="form-control" placeholder="UserId" required autofocus>
+        <input type="text" name="userId" id="userId" class="form-control" placeholder="UserId" required autofocus >
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <label class="radio-inline"><input type="radio" name="select" value="Driver">Driver</label>
+        <label class="radio-inline"><input type="radio" name="select" checked="checked" value="Customer" >Customer</label>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me 
