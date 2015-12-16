@@ -52,10 +52,11 @@
                     <div class="panel panel-primary">
                     <div class="panel-heading">Hire Request</div>
                     <table class="table table-striped">
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Module name</th>
-                        <th>Lecturer name</th>
+						<th>Date</th>
+                        <th>Time</th>
+                        <th>Start </th>
+                        <th>Destination</th>
+                        <th>No of Passengers</th>
                     </table>
                     </div>
                     <br>
