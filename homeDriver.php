@@ -1,3 +1,12 @@
+<?php
+
+session_start();
+if (!isset($_SESSION['userId']))
+{
+    header('Location:index.php');
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,8 +46,8 @@
             <li><a href="about.php">About</a></li>
           </ul>
         <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-            <button type="button" class="btn btn-danger">Sign Out</button>
+          <form class="navbar-form navbar-right" action="footer.php">
+            <button type="submit" class="btn btn-danger">Sign Out</button>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
