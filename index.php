@@ -44,7 +44,7 @@ session_start();
 			<a href="signup.php">Sign up as a driver</a>
           </label>
             <label>
-            <a href="signup.php">Sign up as a Passeger</a>
+            <a href="signup.php">Sign up as a Passenger</a>
             </label>
       </form>
 
