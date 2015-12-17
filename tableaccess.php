@@ -60,6 +60,29 @@ function changeAvailability($driverId){
     $query = mysql_query("UPDATE driver SET availability = availability XOR 1 WHERE  driver_id = '$driverId'");
     
 }
+function insertDriverBid($driverId,$requestId,$bid){
+	echo $driverId,$requestId,$bid;
+    $query = mysql_query("INSERT INTO driverbid (`bid`, `driver_id`, `request_id`) VALUES ('$bid','$driverId','$requestId')");
+    
+}
 
+function hasBid($driverId,$requestId){
+    $query = mysql_query("SELECT bid FROM driverbid WHERE driver_id = '$driverId' AND request_id ='$requestId' ");
+    $row = mysql_fetch_array($query);
+    if($row['bid'] == NULL){
+		return "Bid";
+    }else{
+	   return "Done";
+    }
+}
+function enableBid($driverId,$requestId){
+    $query = mysql_query("SELECT bid FROM driverbid WHERE driver_id = '$driverId' AND request_id ='$requestId' ");
+    $row = mysql_fetch_array($query);
+    if($row['bid'] == NULL){
+		return NULL;
+    }else{
+	   return "disabled";
+    }
+}
 
 ?>

@@ -2,8 +2,24 @@
 
 <?php
 	include "tableaccess.php";
-	$driver_id = "0001";
+	$driver_id = $_SESSION['userId'];
+	$driver_name = $_SESSION['name'];
 ?>
+
+<script>
+	function myFunction(requestId) {
+		var bid = prompt("Please enter your Bid", "0.00");
+		if (bid != null) {
+			
+			//window.location="MakeBid.php?driverId=<?php echo $driver_id ?>&requestId = 'requestId'&requestId = bid"
+			//insertDriverBid(<?php echo $driver_id ?>,requestId,bid);
+			
+		}
+		//document.write(requestId);
+		
+	}
+
+</script>
 
 
 <!DOCTYPE html>
@@ -44,8 +60,8 @@
             <li><a href="about.php">About</a></li>
           </ul>
         <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-            <button type="button" class="btn btn-danger">Sign Out</button>
+          <form class="navbar-form navbar-right" action="footer.php">
+            <button type="submit" class="btn btn-danger">Sign Out</button>
           </form>
           
           <form class="navbar-form navbar-right" action="CallFunction.php" method ="post">
@@ -60,7 +76,7 @@
     
     <div class="container">
             <div class="jumbotron">
-                <form action="CallFunction.php?document.getElementById("myTable").rows[0].cells[0]" method="post">
+                
                     <br>
                     <br>
                     <br>
@@ -86,8 +102,12 @@
 										<td><?php echo $request[1]," and " ,$request[2] ?></td>
 										<td><?php echo $request[3]," and " ,$request[4]  ?></td>
 										<td><?php echo $request[7] ?></td>
-										<td><input type="submit" value="   Bid  "/></td>
-										
+										<form class="navbar-form navbar-right" action="MakeBid.php" method ="post">
+											<input type="hidden" name="driverId" value="<?=$driver_id?>" />
+											<input type="hidden" name="requestId" value="<?=$request[0]?>" />
+											
+											<td><input type="submit" value="  <?php echo hasBid($driver_id,$request[0])?> " <?php echo enableBid($driver_id,$request[0])?>/></td>
+										</form>
 										
 									 </tr>
 									
@@ -100,10 +120,10 @@
                     </div>
                     <br>
                         </div>
-                </form>
+                
             </div>
         </div>
-
+		
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

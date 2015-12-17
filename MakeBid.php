@@ -1,10 +1,11 @@
 
-
 <?php
 	include "tableaccess.php";
-	$driver_id = "0001";
+	$driver_id = $_POST['driverId'];
+	$requestId = $_POST['requestId'];
+	//$bid = $_POST['bid'];
+	
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -59,12 +60,13 @@
     </nav>
     
     <div class="container" style="width:250px;">
-    <form method="POST" action="">
+    <form method="POST" action="CallFunction.php" method ="post">
         <div style="padding-top:200px;"></div>
-        Hire ID <input type="text" name="hireId" id="hireId" class="form-control" readonly/>
+        <input type="hidden" name="hireId" id="hireId" class="form-control" value ="<?php echo $requestId ?>" readonly/>
         Bid<input type="text" name="bid" id="bid" class="form-control"/>
-        
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Bid</button>
+        <input type="hidden" name="driver_id" value="<?=$driver_id?>" />
+		<input type="hidden" name="requestId" value="<?=$requestId?>" />
+        <button  type="submit">Bid</button>
           
       </form>
      </div>
