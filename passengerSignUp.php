@@ -5,7 +5,7 @@
  * Date: 12/16/15
  * Time: 7:33 PM
  */
-include "Header.php";
+include "header.php";
 
 $name = ($_POST['name']);
 $contactNo = ($_POST['contactNo']);

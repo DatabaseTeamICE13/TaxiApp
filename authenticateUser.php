@@ -42,7 +42,7 @@
                     $_SESSION['userId'] = $table_id;
                     $_SESSION['name'] = $user;
                     Print '<script>alert("Successfully Logged In!");</script>'; // prompts user
-                    header("location:passengerprofile.php"); // redirects the user to authenticated home page
+                    header("location:passengerProfile.php"); // redirects the user to authenticated home page
 
             }
             else{

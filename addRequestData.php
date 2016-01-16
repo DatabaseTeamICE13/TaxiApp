@@ -1,5 +1,5 @@
 <?php
-include 'Header.php';
+include 'header.php';
 $hire_request_sql = "SELECT * FROM hire_request";
 $result=mysql_query($hire_request_sql);
 $requestId=mysql_num_rows($result)+1;

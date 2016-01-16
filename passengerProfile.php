@@ -165,7 +165,7 @@ session_start();
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-            <img src="images/car.gif"  height="50" width="50">
+            <img src="Images/car.gif"  height="50" width="50">
           <a class="navbar-brand" href="#">Taxi-App Welcome <?php echo $_SESSION['name'] ?></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">

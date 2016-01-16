@@ -1,6 +1,6 @@
 <?php
 ini_set('display_errors', 'On');
-include 'Header.php';
+include 'header.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
