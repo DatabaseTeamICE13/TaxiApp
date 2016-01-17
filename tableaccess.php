@@ -75,6 +75,15 @@ function hasBid($driverId,$requestId){
 	   return "Done";
     }
 }
+function getBid($driverId,$requestId){
+    $query = mysql_query("SELECT bid FROM driverbid WHERE driver_id = '$driverId' AND request_id ='$requestId' ");
+    $row = mysql_fetch_array($query);
+    if($row['bid'] == NULL){
+        return "Bid";
+    }else{
+       return $row['bid'];
+    }
+}
 function enableBid($driverId,$requestId){
     $query = mysql_query("SELECT bid FROM driverbid WHERE driver_id = '$driverId' AND request_id ='$requestId' ");
     $row = mysql_fetch_array($query);

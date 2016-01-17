@@ -1,7 +1,7 @@
 <?php
     include "header.php";
     @$user = $_POST['userId'];
-    @$password = $_POST['password'];
+    @$password = md5($_POST['password']);
     @$selection = $_POST['select'];
     if ($selection == "Driver"){
         $query =mysql_query("SELECT * from `driver` where driver_id='$user'");
@@ -42,7 +42,7 @@
                     $_SESSION['userId'] = $table_id;
                     $_SESSION['name'] = $user;
                     Print '<script>alert("Successfully Logged In!");</script>'; // prompts user
-                    header("location:passengerprofile.php"); // redirects the user to authenticated home page
+                    header("location:passengerProfile.php"); // redirects the user to authenticated home page
 
             }
             else{

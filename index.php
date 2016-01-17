@@ -17,12 +17,23 @@ session_start();
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <script>
+      function UserChecker(document){
+        usr=document.getElementById("uid").value;
+        val= document.getElementById("pwd").value;
+        if (val!="" && usr !="") {
+          document.getElementById("login").action = "UserCheck.php";
+        }else{
+          alert("Fill the Blanks and Proceed!!!")
+        }
+      }
+    </script>
    </head>
 
   <body>
 	
     <div class="container" style="width:250px;">
-      <form class="form-signin" id="sign_in_form" method="POST" onsubmit="UserChecker(document)" action="authenticateUser.php">
+      <form class="form-signin" id="sign_in_form" method="POST"  action="authenticateUser.php">
         <div style="padding-top:200px;"><h2 style="display:inline; font-family:serif; padding-right:50px;" class="form-signin-heading" style="alignment">Taxi-App</h2><img src="Images/car.gif"  height="50" width="50"></div>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="text" name="userId" id="userId" class="form-control" placeholder="UserId" required autofocus >
