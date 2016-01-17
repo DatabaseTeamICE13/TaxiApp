@@ -180,7 +180,14 @@ session_start();
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
-	<br><br>
+    <div class="container">
+  <h2>Tabs</h2>               
+  <ul class="nav nav-pills" role="tablist">
+    <li class="active"><a href="#">Home</a></li>
+    <li><a href="seeRequest.php">See Driver Bids</a></li>     
+  </ul>
+</div>
+	<br>
 	<div id="googleMap" style="width:1300px;height:550px; margin:auto; border: 5px solid #73AD21; padding: 15px;"></div>
 	
 
