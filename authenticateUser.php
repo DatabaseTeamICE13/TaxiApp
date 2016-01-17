@@ -1,7 +1,7 @@
 <?php
     include "header.php";
     @$user = $_POST['userId'];
-    @$password = $_POST['password'];
+    @$password = md5($_POST['password']);
     @$selection = $_POST['select'];
     if ($selection == "Driver"){
         $query =mysql_query("SELECT * from `driver` where driver_id='$user'");
