@@ -127,6 +127,10 @@
     document.getElementById("endLong").value=String(endLong);
     
   }
+  function bidData(requestId){
+    document.getElementById("requestId").value=String(requestId);
+    document.getElementById("hireId").value=String(requestId);
+  }
   
 </script>
 
@@ -195,12 +199,7 @@
 										<td><?php echo $request[1]," and " ,$request[2] ?></td>
 										<td><?php echo $request[3]," and " ,$request[4]  ?></td>
 										<td><?php echo $request[7] ?></td>
-										<form class="navbar-form navbar-right" action="MakeBid.php" method ="post">
-											<input type="hidden" name="driverId" value="<?=$driver_id?>" />
-											<input type="hidden" name="requestId" value="<?=$request[0]?>" />
-											
-											<td><input type="submit" value="  <?php echo hasBid($driver_id,$request[0])?> " <?php echo enableBid($driver_id,$request[0])?>/></td>
-										</form>
+										<td align="center"><button href="#" class="btn btn-sm btn-success" onclick="bidData(<?php echo $request[0]?>)" <?php echo enableBid($driver_id,$request[0])?> data-toggle="modal" data-target="#basicModal2"> <?php echo getBid($driver_id,$request[0])?></button></td>
 										<td><a href="#" class="btn btn-sm btn-success" onclick="sendData(<?php echo $request[2]?>,<?php echo $request[1]?>,<?php echo $request[4]?>,<?php echo $request[3]?>);setTimeout(initialize, 500);" data-toggle="modal" data-target="#basicModal">Map</a></td>
 									 </tr>
 									
@@ -213,7 +212,7 @@
                     </div>
                     <br>
                         </div>
-                <!--Modal -->
+                <!--Modal for map -->
                 <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
@@ -230,6 +229,36 @@
                     
                     
                     <div id="googleMap" style="width:500px;height:400px; margin:auto; border: 5px solid #73AD21; padding: 15px;"></div>
+                    </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                 <!--Modal for bid -->
+                <div class="modal fade" id="basicModal2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">close x</button>
+                        <h4 class="modal-title" id="myModalLabel">Bid</h4>
+                      </div>
+                    <div class="modal-body">
+                    
+                    <pre id="bid">Place your bid</pre>
+                    <div class="container" style="width:250px;">
+                      <form method="POST" action="CallFunction.php" method ="post">
+                          <div style="padding-top:10px;"></div>
+                          <input type="hidden" name="hireId" id="hireId" class="form-control" value =""/>
+                          <input type="text" name="bid" id="bid" class="form-control"/>
+                          <input type="hidden" name="driver_id" value="<?=$driver_id?>" />
+                          <input type="hidden" id="requestId" name="requestId" value="" />
+                          <button  type="submit">Bid</button>
+                            
+                      </form>
+                     </div>
+                    
                     </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
