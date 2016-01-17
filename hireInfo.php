@@ -69,6 +69,10 @@ session_start();
 			<input type="hidden" name="startLong" value="<?php echo $_GET['startLong'];?>">
 			<input type="hidden" name="endLat" value="<?php echo $_GET['endLat'];?>">
 			<input type="hidden" name="endLong" value="<?php echo $_GET['endLong'];?>">
+      <input type="hidden" name="distanceKm" value="<?php echo $_GET['distanceKm'];?>">
+      <input type="hidden" name="distanceM" value="<?php echo $_GET['distanceM'];?>">
+      <input type="hidden" name="durationMins" value="<?php echo $_GET['durationMins'];?>">
+      <input type="hidden" name="durationHrs" value="<?php echo $_GET['durationHrs'];?>">
             <button type="submit" name="submit" class="btn btn-success" >Submit</button>
 		</form>
 	</div>

@@ -19,7 +19,7 @@ session_start();
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
 	<style>
-			#bookTaxiUI, #refreshUI {
+			#bookTaxiUI, #refreshUI{
 		  background-color: #111;
 		  border: 2px solid #fff;
 		  border-radius: 3px;
@@ -32,8 +32,20 @@ session_start();
 		  width:150px;
 		  
 		}
+		#distanceUI,#durationUI {
+			background-color: #fff;
+		  border: 2px solid #111;
+		  border-radius: 3px;
+		  box-shadow: 0 2px 6px rgba(0,0,0,.3);
+		  cursor: default;
+		  float: left;
+		  margin-bottom: 22px;
+		  text-align: center;
+		  height:35px;
+		  
+		}
 
-		#bookTaxiText, #refreshText {
+		#bookTaxiText, #refreshText{
 		  color: rgb(255,255,255);
 		  font-family: Roboto,Arial,sans-serif;
 		  font-size: 18px;
@@ -41,8 +53,16 @@ session_start();
 		  padding-left: 5px;
 		  padding-right: 5px;
 		}
+		#distanceUIText,#durationUIText {
+		  color: rgb(0,0,0);
+		  font-family: Roboto,Arial,sans-serif;
+		  font-size: 18px;
+		  line-height: 25px;
+		  padding-left: 5px;
+		  padding-right: 5px;
+		}
 
-		#refreshUI {
+		#refreshUI,#distanceUI,#durationUI  {
 		  margin-left: 50px;
 		}
 	</style>
@@ -94,12 +114,36 @@ session_start();
 	  refreshText.innerHTML = 'Refresh';
 	  refreshUI.appendChild(refreshText);
 
+	  // Set CSS for the control border
+	  var durationUI = document.createElement('div');
+	  durationUI.id = 'durationUI';
+	  durationUI.title = 'duration';
+	  controlDiv.appendChild(durationUI);
+
+	  // Set CSS for the control interior
+	  var durationUIText = document.createElement('div');
+	  durationUIText.id = 'durationUIText';
+	  durationUIText.innerHTML = 'Duration';
+	  durationUI.appendChild(durationUIText);
+
+	  // Set CSS for the control border
+	  var distanceUI = document.createElement('div');
+	  distanceUI.id = 'distanceUI';
+	  distanceUI.title = 'distance';
+	  controlDiv.appendChild(distanceUI);
+
+	  // Set CSS for the control interior
+	  var distanceUIText = document.createElement('div');
+	  distanceUIText.id = 'distanceUIText';
+	  distanceUIText.innerHTML = 'Distance';
+	  distanceUI.appendChild(distanceUIText);
+
 	  // Set up the click event listener for 'Center Map': Set the center of the map
 	  // to the current center of the control.
 	  bookTaxiUI.addEventListener('click', function() {
 		calcRoute(markerStart.getPosition().lat(),markerStart.getPosition().lng(),markerEnd.getPosition().lat(),markerEnd.getPosition().lng());
 		if(check=="true"){
-			  window.location.assign('hireInfo.php?startLat='+markerStart.getPosition().lat()+'&startLong='+markerStart.getPosition().lng()+'&endLat='+markerEnd.getPosition().lat()+'&endLong='+markerEnd.getPosition().lng()+'&distanceKm'+distanceKm+'&distanceM'+distanceM+'&durationHrs'+durationHrs+'&durationMins'+durationMins);
+			  window.location.assign('hireInfo.php?startLat='+markerStart.getPosition().lat()+'&startLong='+markerStart.getPosition().lng()+'&endLat='+markerEnd.getPosition().lat()+'&endLong='+markerEnd.getPosition().lng()+'&distanceKm='+distanceKm+'&distanceM='+distanceM+'&durationHrs='+durationHrs+'&durationMins='+durationMins);
  		}
  		else{
  			alert("Please select markers properly!!!");
@@ -181,10 +225,21 @@ session_start();
                 var duration = response.routes[0].legs[0].duration.value;
                 durationHrs = (duration/3600).toFixed(0);
                 durationMins = (duration%3600/60).toFixed(0);
+                if(durationHrs==0){
+                	document.getElementById("durationUIText").innerHTML="Duration: "+durationMins+"Mins";
+                }
+                else{
+                	document.getElementById("durationUIText").innerHTML="Duration: "+durationHrs+"Hrs "+durationMins+"Mins";
+                }
+                if(distanceKm==0){
+                	document.getElementById("distanceUIText").innerHTML="Duration: "+distanceM+"m";
+                }
+                else{
+                	document.getElementById("distanceUIText").innerHTML="Duration: "+distanceKm+"Km "+distanceM+"m";
+                }
                 check="true";
             } else {
                 check="false";
-                //alert("Directions Request from " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
             }
         });
 	
