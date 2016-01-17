@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `driver` (
 --
 
 INSERT INTO `driver` (`driver_id`, `password`, `name`, `contact_no`, `nic_no`, `availability`, `xCornidates`, `yCornidates`) VALUES
-('0008', '81dc9bdb52d04dc20036dbd8313ed055', 'Hansika', '0773767865', '940263760V', 0, NULL, NULL),
+('hansika', '81dc9bdb52d04dc20036dbd8313ed055', 'Hansika', '0773767865', '940263760V', 0, NULL, NULL),
 ('dineth', 'c8d78fff63457ce5acab2630517b3af4', 'dineth', '0713636666', '932390035v', 1, NULL, NULL),
 ('surani', '9e1a86bf2c4cb7952e4611123558d1be', 'surani', '0123456789', '932390035v', 1, NULL, NULL);
 
@@ -62,10 +62,7 @@ CREATE TABLE IF NOT EXISTS `driverbid` (
 -- Dumping data for table `driverbid`
 --
 
-INSERT INTO `driverbid` (`bid`, `driver_id`, `request_id`) VALUES
-('500.00', '0008', '1'),
-('100.00', '0008', '3'),
-('123.00', '0008', '2');
+
 
 -- --------------------------------------------------------
 
@@ -97,8 +94,8 @@ CREATE TABLE IF NOT EXISTS `hire_request` (
 
 INSERT INTO `hire_request` (`request_id`, `start_loc_long`, `start_loc_lat`, `destination_long`, `destination_lat`, `date`, `time`, `num_of_passengers`, `max_bid`, `contact_no`, `distanceKm`, `distanceM`, `durationHrs`, `durationMins`, `completed`) VALUES
 ('1', 79.9334, 6.9497, 79.9071, 6.9028, '2016-01-20', '12:00:00', 2, '1200.00', '0713636666', 11, 455, 1, 0, 0),
-('2', 79.9457, 6.9491, 79.8746, 6.9503, '2016-01-18', '12:00:00', 2, '1200.00', '0717673721', 10, 830, 0, 0, 1),
-('3', 81.3638, 6.7142, 79.8842, 6.9520, '2016-01-22', '12:00:00', 2, '1200.00', '0717673721', 296, 545, 5, 22, 1);
+('2', 79.9457, 6.9491, 79.8746, 6.9503, '2016-01-18', '12:00:00', 2, '1200.00', '0717673721', 10, 830, 0, 0, 0),
+('3', 81.3638, 6.7142, 79.8842, 6.9520, '2016-01-22', '12:00:00', 2, '1200.00', '0717673721', 296, 545, 5, 22, 0);
 
 -- --------------------------------------------------------
 
@@ -151,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `taxi` (
 --
 
 INSERT INTO `taxi` (`reg_no`, `type`, `max_passengers`, `driver_id`) VALUES
-('we 3456', 'Car', 2, '0008'),
+('we 3456', 'Car', 2, 'hansika'),
 ('wp-1234', '3 Wheeler', 3, 'surani'),
 ('wp-1235', 'Car', 4, 'dineth');
 
@@ -174,17 +171,7 @@ CREATE TABLE IF NOT EXISTS `tour` (
 -- Dumping data for table `tour`
 --
 
-INSERT INTO `tour` (`tour_id`, `charge`, `feedback`, `rating`, `driver_id`, `request_id`) VALUES
-(1, '100.00', NULL, NULL, '0008', '1'),
-(2, '100.00', NULL, NULL, '0008', '1'),
-(3, '100.00', NULL, NULL, '0008', '1'),
-(5, '100.00', NULL, NULL, '0008', '3'),
-(6, '100.00', NULL, NULL, '0008', '3'),
-(7, '123.00', NULL, NULL, '0008', '3'),
-(8, '100.00', NULL, NULL, '0008', '3'),
-(10, '100.00', NULL, NULL, '0008', '3'),
-(11, '100.00', NULL, NULL, '0008', '3'),
-(13, '100.00', NULL, NULL, '0008', '3');
+
 
 --
 -- Indexes for dumped tables
