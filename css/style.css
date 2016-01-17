@@ -1,0 +1,25 @@
+div.taxiCar {
+			width: 100px;
+			height: 100px;
+			position: relative;
+			background-size: 100%;
+			animation-name: example;
+			animation-duration: 10s;
+			#animation-timing-function: linear;
+			animation-iteration-count: infinite;
+			#animation-direction: alternate;
+		}
+div.taxiCar:hover {
+    width: 150px;
+	height:150px;
+}
+		/* Standard syntax */
+		@keyframes example {
+			0%   {left:95%; top:0px;}
+			25%  {left:40%; top:0px;}
+			45%  {left:5%; transform: scaleX(1);  top:0px;}
+			47%  {left:5%; transform: scaleX(0);  top:0px;}
+			55%  {left:5%; transform: scaleX(-1); top:0px;}
+			75%  {left:50%; transform: scaleX(-1);  top:0px;}
+			100% {left:95%; transform: scaleX(-1); top:0px;}
+		}
