@@ -47,6 +47,7 @@ session_start();
 		}
 	</style>
 	<script>
+	var check;
 	var map;
 	var markers = [];
 	var gLocation; //geo location of the customer
@@ -55,6 +56,12 @@ session_start();
 	var endImage = 'Images/end.png';
 	var markerStart;
 	var markerEnd;
+	var directionsDisplay;
+  	var directionsService = new google.maps.DirectionsService();
+  	var distanceKm;
+  	var distanceM;
+  	var durationHrs;
+  	var durationMins;
 	function CenterControl(controlDiv, map, center) {
 	  // We set up a variable for this since we're adding event listeners later.
 	  var control = this;
@@ -90,7 +97,13 @@ session_start();
 	  // Set up the click event listener for 'Center Map': Set the center of the map
 	  // to the current center of the control.
 	  bookTaxiUI.addEventListener('click', function() {
-		  window.location.assign('hireInfo.php?startLat='+markerStart.getPosition().lat()+'&startLong='+markerStart.getPosition().lng()+'&endLat='+markerEnd.getPosition().lat()+'&endLong='+markerEnd.getPosition().lng());
+		calcRoute(markerStart.getPosition().lat(),markerStart.getPosition().lng(),markerEnd.getPosition().lat(),markerEnd.getPosition().lng());
+		if(check=="true"){
+			  window.location.assign('hireInfo.php?startLat='+markerStart.getPosition().lat()+'&startLong='+markerStart.getPosition().lng()+'&endLat='+markerEnd.getPosition().lat()+'&endLong='+markerEnd.getPosition().lng()+'&distanceKm'+distanceKm+'&distanceM'+distanceM+'&durationHrs'+durationHrs+'&durationMins'+durationMins);
+ 		}
+ 		else{
+ 			alert("Please select markers properly!!!");
+ 		}
   });
 
   // Set up the click event listener for 'Set Center': Set the center of the
@@ -101,6 +114,13 @@ session_start();
   });
 }
 	function initialize() {
+	directionsDisplay = new google.maps.DirectionsRenderer({
+    polylineOptions: {
+      strokeColor: "purple"
+    },
+    preserveViewport: true
+  });
+    directionsDisplay.setMap(map);
 	  var mapProp = {
 		center:new google.maps.LatLng(6.933279, 79.849905),
 		zoom:13,
@@ -124,32 +144,51 @@ session_start();
 			icon: startImage,
 			draggable: true
 		  });
-		   markerStart.addListener('click', function() {
 			infowindowStart.open(map, markerStart);
-			});
 		markerEnd = new google.maps.Marker({
 			position: new google.maps.LatLng(6.933279, 79.849905),
 			map: map,
 			icon: endImage,
 			draggable: true
 		  });
-		  markerEnd.addListener('click', function() {
-			infowindowEnd.open(map, markerEnd);
-			});
+		infowindowEnd.open(map, markerEnd);
+	  	google.maps.event.addListener(markerStart, 'dragend', function() { calcRoute(markerStart.getPosition().lat(),markerStart.getPosition().lng(),markerEnd.getPosition().lat(),markerEnd.getPosition().lng()); } );
+	  	google.maps.event.addListener(markerEnd, 'dragend', function() { calcRoute(markerStart.getPosition().lat(),markerStart.getPosition().lng(),markerEnd.getPosition().lat(),markerEnd.getPosition().lng()); } );
 		  markers.push(markerStart);
 		  markers.push(markerEnd);
+		  calcRoute(markerStart.getPosition().lat(),markerStart.getPosition().lng(),markerEnd.getPosition().lat(),markerEnd.getPosition().lng());
 	}
-	function addMarker(location) {
-		  var marker = new google.maps.Marker({
-			position: location,
-			map: map,
-			icon: image,
-			draggable: true
-		  });
-	  markers.push(marker);
+	function calcRoute(startLat,startLong,endLat,endLong) {
+        var start = new google.maps.LatLng(startLat, startLong);
+        var end = new google.maps.LatLng(endLat, endLong);
+        /*var bounds = new google.maps.LatLngBounds();
+        bounds.extend(start);
+        bounds.extend(end);
+        map.fitBounds(bounds);*/
+        var request = {
+            origin: start,
+            destination: end,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+        directionsService.route(request, function (response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+                directionsDisplay.setMap(map);
+                directionsDisplay.setOptions( { suppressMarkers: true } );
+                var distance = response.routes[0].legs[0].distance.value;
+                distanceKm = (distance/1000).toFixed(0);
+                distanceM = (distance%1000).toFixed(0);
+                var duration = response.routes[0].legs[0].duration.value;
+                durationHrs = (duration/3600).toFixed(0);
+                durationMins = (duration%3600/60).toFixed(0);
+                check="true";
+            } else {
+                check="false";
+                //alert("Directions Request from " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
+            }
+        });
+	
 	}
-	
-	
 	google.maps.event.addDomListener(window, 'load', initialize);
 	</script>
    </head>
