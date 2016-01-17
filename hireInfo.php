@@ -29,7 +29,7 @@ session_start();
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-            <img src="images/car.gif"  height="50" width="50">
+            <img src="Images/car.gif"  height="50" width="50">
           <a class="navbar-brand" href="#">Taxi-App Welcome <?php echo $_SESSION['name'] ?></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -50,19 +50,19 @@ session_start();
 		<form action="addRequestData.php" method="POST" class="form-signin">
 			 <div class="form-group">
             <label for="exampleInputEmail1">Date</label>
-            <input type="date" class="form-control" name="date">
+            <input type="date" class="form-control" name="date" id="date"  onchange="checkDate()" required autofocus>
             </div>
              <div class="form-group">
             <label for="exampleInputEmail1">Time</label>
-            <input type="time" name="time" class="form-control">
+            <input type="time" name="time" class="form-control" required autofocus>
             </div>
              <div class="form-group">
             <label for="exampleInputEmail1">No of Passengers</label>
-            <input type="number" name="noOfPassengers" class="form-control">
+            <input type="number" name="noOfPassengers" class="form-control" required autofocus>
             </div>
              <div class="form-group">
             <label for="exampleInputEmail1">Max Bid</label>
-            <input type="number" name="maxBid" class="form-control">
+            <input type="number" name="maxBid" class="form-control" required autofocus>
             </div>
 			<br>
 			<input type="hidden" name="startLat" value="<?php echo $_GET['startLat'];?>">
@@ -73,5 +73,30 @@ session_start();
 		</form>
 	</div>
       </div>
+
+  <script>
+      function checkDate(){
+          var date = document.getElementById("date").value;
+          var crntDate = new Date();
+          var givenDdate = new Date(date);
+          //alert(mydate);
+
+          if(crntDate.getFullYear() > givenDdate.getFullYear()){
+              alert("You can not enter passed dates!");
+              document.getElementById("date").value = "";
+          }
+          else if((crntDate.getFullYear() == givenDdate.getFullYear()) && (crntDate.getMonth() > givenDdate.getMonth())){
+              alert("You can not enter passed dates!");
+              document.getElementById("date").value = "";
+          }
+          else  if((crntDate.getFullYear() == givenDdate.getFullYear()) && (crntDate.getMonth() == givenDdate.getMonth()) && (crntDate.getDate() > givenDdate.getDate())){
+              alert("You can not enter passed dates!");
+              document.getElementById("date").value = "";
+          }
+
+
+      }
+  </script>
+
   </body>
 </html>
