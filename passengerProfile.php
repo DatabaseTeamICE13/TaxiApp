@@ -141,6 +141,7 @@ session_start();
 	  // Set up the click event listener for 'Center Map': Set the center of the map
 	  // to the current center of the control.
 	  bookTaxiUI.addEventListener('click', function() {
+		check="false";
 		calcRoute(markerStart.getPosition().lat(),markerStart.getPosition().lng(),markerEnd.getPosition().lat(),markerEnd.getPosition().lng());
 		if(check=="true"){
 			  window.location.assign('hireInfo.php?startLat='+markerStart.getPosition().lat()+'&startLong='+markerStart.getPosition().lng()+'&endLat='+markerEnd.getPosition().lat()+'&endLong='+markerEnd.getPosition().lng()+'&distanceKm='+distanceKm+'&distanceM='+distanceM+'&durationHrs='+durationHrs+'&durationMins='+durationMins);

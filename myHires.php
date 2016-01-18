@@ -135,72 +135,109 @@
     document.getElementById("hireId").value=String(requestId);
   }
   
-  function loadAvailableRequests(){
-	document.getElementById("content").innerHTML='<object type="text/html" data="availableHires.php" width="1100px" height="800px" style="overflow:auto;border:5px "></object>';
-  }	
-  
-   function loadMyHires(){
-	document.getElementById("content").innerHTML='<object type="text/html" data="myHires.php" width="1100px" height="800px" style="overflow:auto;border:5px "></object>';
-  }	
   
 </script>
 
   </head>
 
   <body>
+ 
+    
+    <div class="container" >
+            <div class="jumbotron">
+                
+                    <br>
+                    <br>
+                    <br>
+                    <div class="panel panel-primary" >
+                    <div class="panel-heading">My Hires</div>
+                    <table class="table table-condensed">
+						<th>Hire ID</th>
+						<th>Date</th>
+                        <th>Time</th>
+                        <th>No of Passengers</th>
+						<?php
+							$hireRequests =getHireRequests();
+							
+							foreach ($hireRequests as $request) {
+						?>
+						<?php	if(getBidStatus($driver_id,$request[0])){?>
+									<tr >
+										<td><?php echo $request[0] ?></td>
+										<td><?php echo $request[5] ?></td>
+										<td><?php echo $request[6] ?></td>
+										<td><?php echo $request[7] ?></td>
+										<td align="center"><button href="#" class="btn btn-sm btn-success" onclick="bidData(<?php echo $request[0]?>)" <?php echo enableBid($driver_id,$request[0])?> data-toggle="modal" data-target="#basicModal2"> <?php echo getBid($driver_id,$request[0])?></button></td>
+										<td><a href="#" class="btn btn-sm btn-success" onclick="sendData(<?php echo $request[2]?>,<?php echo $request[1]?>,<?php echo $request[4]?>,<?php echo $request[3]?>);setTimeout(initialize, 500);" data-toggle="modal" data-target="#basicModal">Map</a></td>
+									 </tr>
+						<?php		
+								}						
+							}
+						?>
+                    
+                    </table>
+                    </div>
+                    <br>
+                        </div>
+                <!--Modal for map -->
+                <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">close x</button>
+                        <h4 class="modal-title" id="myModalLabel">Route for the request</h4>
+                      </div>
+                    <div class="modal-body">
+                    <input type="hidden" id="startLat" name="test" value="initial" />
+                    <input type="hidden" id="startLong" name="test1" value="initial" />
+                    <input type="hidden" id="endLat" name="test2" value="initial" />
+                    <input type="hidden" id="endLong" name="test3" value="initial" />
+                    <pre id="distance_duration"></pre>
+                    
+                    
+                    <div id="googleMap" style="width:500px;height:400px; margin:auto; border: 5px solid #73AD21; padding: 15px;"></div>
+                    </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                 <!--Modal for bid -->
+                <div class="modal fade" id="basicModal2" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">close x</button>
+                        <h4 class="modal-title" id="myModalLabel">Bid</h4>
+                      </div>
+                    <div class="modal-body">
+                    
+                    <pre id="bid">Place your bid</pre>
+                    <div class="container" style="width:250px;">
+                      <form method="POST" action="CallFunction.php" method ="post">
+                          <div style="padding-top:10px;"></div>
+                          <input type="hidden" name="hireId" id="hireId" class="form-control" value =""/>
+                          <input type="text" name="bid" id="bid" class="form-control"/>
+                          <input type="hidden" name="driver_id" value="<?=$driver_id?>" />
+                          <input type="hidden" id="requestId" name="requestId" value="" />
+                          <button  type="submit">Bid</button>
+                            
+                      </form>
+                     </div>
+                    
+                    </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-    <!-- Fixed navbar -->
-   <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-            <img src="Images/car.gif"  height="50" width="50">
-          <a class="navbar-brand" href="#">Taxi-App</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="index.php">Home</a></li>
-            <li><a href="about.php">About</a></li>
 
-          </ul>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" action="footer.php">
-            <button type="submit" class="btn btn-danger">Sign Out</button>
-          </form>
-          
-          <form class="navbar-form navbar-right" action="CallFunction.php" method ="post" >
-				<input type="hidden" name="driver_id" value="<?=$driver_id?>" />
-				<a><font color="white">Availability</font></a> 
-				<input type="submit" class="btn btn-danger" value = "<?php echo getAvailability($GLOBALS["driver_id"]) ?>"/>
-          </form>
-          
-        </div><!--/.navbar-collapse -->
-      </div>
-    </nav>
-    
-    
-    <!-- sidebar  -->
-        
-        <div class="sidebar" style="padding-top:60px;">
-			<ul>
-			  <li><a  class="active" onclick="loadMyHires()">My Hires</a></li>
-			  <li><a  onclick="loadAvailableRequests()">Hire Requests</a></li>
-			  <li><a  onclick="">inbox</a></li>
-			  
-			</ul>
-		</div>
-    
-    
-    <!-- sidebar end -->
-    
-    <div id ="content" style="margin-left:10%;padding:5px;">
-		<object type="text/html" data="MyHires.php" width="1100px" height="800px" style="overflow:auto;border:5px "></object>
-	</div>
+		 
 
 
 
