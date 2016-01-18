@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.3.11
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2016 at 04:03 PM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Generation Time: Jan 18, 2016 at 03:00 AM
+-- Server version: 5.6.24
+-- PHP Version: 5.6.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -34,8 +34,7 @@ CREATE TABLE IF NOT EXISTS `driver` (
   `nic_no` varchar(10) DEFAULT NULL,
   `availability` tinyint(1) NOT NULL DEFAULT '1',
   `xCornidates` float DEFAULT NULL,
-  `yCornidates` float DEFAULT NULL,
-  PRIMARY KEY (`driver_id`)
+  `yCornidates` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -43,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `driver` (
 --
 
 INSERT INTO `driver` (`driver_id`, `password`, `name`, `contact_no`, `nic_no`, `availability`, `xCornidates`, `yCornidates`) VALUES
+('0008', '81dc9bdb52d04dc20036dbd8313ed055', 'Hansika', '0773767865', '940263760V', 1, NULL, NULL),
 ('dineth', 'c8d78fff63457ce5acab2630517b3af4', 'dineth', '0713636666', '932390035v', 1, NULL, NULL),
 ('surani', '9e1a86bf2c4cb7952e4611123558d1be', 'surani', '0123456789', '932390035v', 1, NULL, NULL);
 
@@ -55,10 +55,17 @@ INSERT INTO `driver` (`driver_id`, `password`, `name`, `contact_no`, `nic_no`, `
 CREATE TABLE IF NOT EXISTS `driverbid` (
   `bid` decimal(9,2) NOT NULL,
   `driver_id` varchar(10) DEFAULT NULL,
-  `request_id` varchar(10) DEFAULT NULL,
-  KEY `driver_id` (`driver_id`),
-  KEY `request_id` (`request_id`)
+  `request_id` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `driverbid`
+--
+
+INSERT INTO `driverbid` (`bid`, `driver_id`, `request_id`) VALUES
+('500.00', '0008', '1'),
+('100.00', '0008', '3'),
+('123.00', '0008', '2');
 
 -- --------------------------------------------------------
 
@@ -81,18 +88,17 @@ CREATE TABLE IF NOT EXISTS `hire_request` (
   `distanceM` int(11) NOT NULL,
   `durationHrs` int(11) NOT NULL,
   `durationMins` int(11) NOT NULL,
-  PRIMARY KEY (`request_id`),
-  KEY `contact_no` (`contact_no`)
+  `completed` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `hire_request`
 --
 
-INSERT INTO `hire_request` (`request_id`, `start_loc_long`, `start_loc_lat`, `destination_long`, `destination_lat`, `date`, `time`, `num_of_passengers`, `max_bid`, `contact_no`, `distanceKm`, `distanceM`, `durationHrs`, `durationMins`) VALUES
-('1', 79.9334, 6.9497, 79.9071, 6.9028, '2016-01-20', '12:00:00', 2, '1200.00', '0713636666', 11, 455, 1, 0),
-('2', 79.9457, 6.9491, 79.8746, 6.9503, '2016-01-18', '12:00:00', 2, '1200.00', '0713636666', 10, 830, 0, 0),
-('3', 81.3638, 6.7142, 79.8842, 6.9520, '2016-01-22', '12:00:00', 2, '1200.00', '0713636666', 296, 545, 5, 22);
+INSERT INTO `hire_request` (`request_id`, `start_loc_long`, `start_loc_lat`, `destination_long`, `destination_lat`, `date`, `time`, `num_of_passengers`, `max_bid`, `contact_no`, `distanceKm`, `distanceM`, `durationHrs`, `durationMins`, `completed`) VALUES
+('1', 79.9334, 6.9497, 79.9071, 6.9028, '2016-01-20', '12:00:00', 2, '1200.00', '0713636666', 11, 455, 1, 0, 0),
+('2', 79.9457, 6.9491, 79.8746, 6.9503, '2016-01-18', '12:00:00', 2, '1200.00', '0717673721', 10, 830, 0, 0, 1),
+('3', 81.3638, 6.7142, 79.8842, 6.9520, '2016-01-22', '12:00:00', 2, '1200.00', '0717673721', 296, 545, 5, 22, 1);
 
 -- --------------------------------------------------------
 
@@ -103,9 +109,7 @@ INSERT INTO `hire_request` (`request_id`, `start_loc_long`, `start_loc_lat`, `de
 CREATE TABLE IF NOT EXISTS `passenger` (
   `contact_no` varchar(10) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `password` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`contact_no`),
-  UNIQUE KEY `contact_no` (`contact_no`)
+  `password` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -113,7 +117,8 @@ CREATE TABLE IF NOT EXISTS `passenger` (
 --
 
 INSERT INTO `passenger` (`contact_no`, `name`, `password`) VALUES
-('0713636666', 'nimantha', 'cefc10f1447898c039b1f8e00f41c61c');
+('0713636666', 'nimantha', 'cefc10f1447898c039b1f8e00f41c61c'),
+('0717673721', 'Madushan', '81dc9bdb52d04dc20036dbd8313ed055');
 
 -- --------------------------------------------------------
 
@@ -125,9 +130,7 @@ CREATE TABLE IF NOT EXISTS `payment` (
   `payment_id` varchar(10) NOT NULL,
   `date` date NOT NULL,
   `amount` decimal(9,2) DEFAULT NULL,
-  `driver_id` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`payment_id`),
-  KEY `driver_id` (`driver_id`)
+  `driver_id` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -140,9 +143,7 @@ CREATE TABLE IF NOT EXISTS `taxi` (
   `reg_no` varchar(10) NOT NULL,
   `type` varchar(30) DEFAULT NULL,
   `max_passengers` int(2) DEFAULT NULL,
-  `driver_id` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`reg_no`),
-  KEY `driver_id` (`driver_id`)
+  `driver_id` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -150,6 +151,7 @@ CREATE TABLE IF NOT EXISTS `taxi` (
 --
 
 INSERT INTO `taxi` (`reg_no`, `type`, `max_passengers`, `driver_id`) VALUES
+('we 3456', 'Car', 2, '0008'),
 ('wp-1234', '3 Wheeler', 3, 'surani'),
 ('wp-1235', 'Car', 4, 'dineth');
 
@@ -160,17 +162,84 @@ INSERT INTO `taxi` (`reg_no`, `type`, `max_passengers`, `driver_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `tour` (
-  `tour_id` varchar(10) NOT NULL,
+  `tour_id` int(10) NOT NULL,
   `charge` decimal(9,2) NOT NULL,
   `feedback` text,
   `rating` tinyint(4) DEFAULT NULL,
   `driver_id` varchar(10) DEFAULT NULL,
-  `request_id` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`tour_id`),
-  KEY `driver_id` (`driver_id`),
-  KEY `request_id` (`request_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `request_id` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tour`
+--
+
+INSERT INTO `tour` (`tour_id`, `charge`, `feedback`, `rating`, `driver_id`, `request_id`) VALUES
+(1, '100.00', NULL, NULL, '0008', '1'),
+(2, '100.00', NULL, NULL, '0008', '1'),
+(3, '100.00', NULL, NULL, '0008', '1'),
+(5, '100.00', NULL, NULL, '0008', '3'),
+(6, '100.00', NULL, NULL, '0008', '3'),
+(7, '123.00', NULL, NULL, '0008', '3'),
+(8, '100.00', NULL, NULL, '0008', '3'),
+(9, '123.00', NULL, NULL, '0008', '2'),
+(10, '100.00', NULL, NULL, '0008', '3');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `driver`
+--
+ALTER TABLE `driver`
+  ADD PRIMARY KEY (`driver_id`);
+
+--
+-- Indexes for table `driverbid`
+--
+ALTER TABLE `driverbid`
+  ADD KEY `driver_id` (`driver_id`), ADD KEY `request_id` (`request_id`);
+
+--
+-- Indexes for table `hire_request`
+--
+ALTER TABLE `hire_request`
+  ADD PRIMARY KEY (`request_id`), ADD KEY `contact_no` (`contact_no`);
+
+--
+-- Indexes for table `passenger`
+--
+ALTER TABLE `passenger`
+  ADD PRIMARY KEY (`contact_no`), ADD UNIQUE KEY `contact_no` (`contact_no`);
+
+--
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`payment_id`), ADD KEY `driver_id` (`driver_id`);
+
+--
+-- Indexes for table `taxi`
+--
+ALTER TABLE `taxi`
+  ADD PRIMARY KEY (`reg_no`), ADD KEY `driver_id` (`driver_id`);
+
+--
+-- Indexes for table `tour`
+--
+ALTER TABLE `tour`
+  ADD PRIMARY KEY (`tour_id`), ADD KEY `driver_id` (`driver_id`), ADD KEY `request_id` (`request_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tour`
+--
+ALTER TABLE `tour`
+  MODIFY `tour_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- Constraints for dumped tables
 --
@@ -179,33 +248,33 @@ CREATE TABLE IF NOT EXISTS `tour` (
 -- Constraints for table `driverbid`
 --
 ALTER TABLE `driverbid`
-  ADD CONSTRAINT `driverbid_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`driver_id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `driverbid_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `hire_request` (`request_id`) ON DELETE SET NULL;
+ADD CONSTRAINT `driverbid_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`driver_id`) ON DELETE SET NULL,
+ADD CONSTRAINT `driverbid_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `hire_request` (`request_id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `hire_request`
 --
 ALTER TABLE `hire_request`
-  ADD CONSTRAINT `hire_request_ibfk_1` FOREIGN KEY (`contact_no`) REFERENCES `passenger` (`contact_no`) ON DELETE CASCADE;
+ADD CONSTRAINT `hire_request_ibfk_1` FOREIGN KEY (`contact_no`) REFERENCES `passenger` (`contact_no`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `payment`
 --
 ALTER TABLE `payment`
-  ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`driver_id`) ON DELETE SET NULL;
+ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`driver_id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `taxi`
 --
 ALTER TABLE `taxi`
-  ADD CONSTRAINT `taxi_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`driver_id`) ON DELETE CASCADE;
+ADD CONSTRAINT `taxi_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`driver_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `tour`
 --
 ALTER TABLE `tour`
-  ADD CONSTRAINT `tour_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`driver_id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `tour_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `hire_request` (`request_id`) ON DELETE SET NULL;
+ADD CONSTRAINT `tour_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`driver_id`) ON DELETE SET NULL,
+ADD CONSTRAINT `tour_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `hire_request` (`request_id`) ON DELETE SET NULL;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
