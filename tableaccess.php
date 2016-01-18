@@ -20,7 +20,7 @@ function getY($driverId){
 
 function getHireRequests(){
     $requests = array();
-    $query = mysql_query("SELECT request_id, start_loc_long, start_loc_lat, destination_long, destination_lat, date, time, num_of_passengers, max_bid, contact_no FROM Hire_request WHERE request_id NOT IN (SELECT request_id FROM tour) ");
+    $query = mysql_query("SELECT request_id, start_loc_long, start_loc_lat, destination_long, destination_lat, date, time, num_of_passengers, max_bid, contact_no FROM hire_request WHERE request_id NOT IN (SELECT request_id FROM tour) ");
     
     while($row = mysql_fetch_array($query)){ // display all rows  from query
 		$requestRow = array();

@@ -48,21 +48,31 @@ session_start();
 	<div class="row">
     <div class="col-md-2 col-md-offset-5">
 		<form action="addRequestData.php" method="POST" class="form-signin">
-			 <div class="form-group">
-            <label for="exampleInputEmail1">Date</label>
-            <input type="date" class="form-control" name="date" id="date"  onchange="checkDate()" required autofocus>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" name="date" id="date"  onchange="checkDate()" required autofocus>
             </div>
-             <div class="form-group">
-            <label for="exampleInputEmail1">Time</label>
-            <input type="time" name="time" class="form-control" required autofocus>
+            <div class="form-group">
+                <label for="time">Time</label>
+                <input type="time" name="time" id="time" class="form-control" onfocusout="validateTime()" required autofocus>
             </div>
-             <div class="form-group">
-            <label for="exampleInputEmail1">No of Passengers</label>
-            <input type="number" name="noOfPassengers" class="form-control" required autofocus>
+            <div class="form-group">
+                <label for="vehicleType">Vehicle Type</label>
+                <div class="dropdown" >
+                    <select name="vehicleType" id="vehicleType" onfocus="clearNumPassengers()" required>
+                        <option value="3 Wheeler">3 Wheeler</option>
+                        <option value="Car">Car</option>
+                        <option value="Van">Van</option>
+                    </select>
+                </div>
             </div>
-             <div class="form-group">
-            <label for="exampleInputEmail1">Max Bid</label>
-            <input type="number" name="maxBid" class="form-control" required autofocus>
+            <div class="form-group">
+                <label for="noOfPassengers">Number of Passengers</label>
+                <input type="number" name="noOfPassengers" id="noOfPassengers" class="form-control" onfocusout="validatePassengers()" required autofocus>
+            </div>
+            <div class="form-group">
+                <label for="maxBid">Max Bid</label>
+                <input type="number" name="maxBid" class="form-control" required autofocus>
             </div>
 			<br>
 			<input type="hidden" name="startLat" value="<?php echo $_GET['startLat'];?>">
@@ -99,6 +109,40 @@ session_start();
           }
 
 
+      }
+  </script>
+
+  <script>
+      function clearNumPassengers(){
+          document.getElementById("noOfPassengers").value="";
+      }
+  </script>
+
+  <script>
+      function validatePassengers(){
+          var num = (document.getElementById("noOfPassengers").value);
+          var vehicle = (document.getElementById("vehicleType").value);
+          if((vehicle == "Car") && (num < 1 || num > 4)){
+              alert("Number of passengers does not match with the vehicle!");
+              document.getElementById("noOfPassengers").value="";
+          }
+          else if((vehicle == "Van") && (num < 1 || num > 20)) {
+              alert("Number of passengers does not match with the vehicle!");
+              document.getElementById("noOfPassengers").value="";
+          }
+          else if((vehicle == "3 Wheeler") && (num < 1 || num > 3)) {
+              alert("Number of passengers does not match with the vehicle!");
+              document.getElementById("noOfPassengers").value="";
+          }
+      }
+  </script>
+
+  <script>
+      function validateTime(){
+          var time = (document.getElementById("time").value);
+          if(time==""){
+              alert("Wrong time format!");
+          }
       }
   </script>
 
