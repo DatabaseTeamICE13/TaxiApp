@@ -9,6 +9,7 @@ $endLat=$_POST['endLat'];
 $endLong=$_POST['endLong'];
 $date=$_POST['date'];
 $time=$_POST['time'];
+$vehicleType=$_POST['vehicleType'];
 $noOfPassengers=$_POST['noOfPassengers'];
 $maxBid=$_POST['maxBid'];
 $distanceKm=$_POST['distanceKm'];
@@ -16,9 +17,10 @@ $distanceM=$_POST['distanceM'];
 $durationHrs=$_POST['durationHrs'];
 $durationMins=$_POST['durationMins'];
 $userId=$_SESSION['userId'];
+$completed=0;
 $SQLCheck="Select * from hire_request where date='$date' AND time='$time' AND contact_no='$userId'";
 if(mysql_num_rows(mysql_query($SQLCheck))<=0){
-	$SQL = "INSERT INTO hire_request VALUES('$requestId','$startLong','$startLat','$endLong','$endLat','$date','$time','$noOfPassengers','$maxBid','$userId','$distanceKm','$distanceM','$durationHrs','$durationMins')";
+	$SQL = "INSERT INTO hire_request VALUES('$requestId','$startLong','$startLat','$endLong','$endLat','$date','$time','$noOfPassengers','$maxBid','$userId','$distanceKm','$distanceM','$durationHrs','$durationMins','$completed','$vehicleType')";
 	mysql_query($SQL);
 	header('location:requestSuccess.php');
 }
