@@ -2,7 +2,6 @@
 
 <?php
 	include "tableaccess.php";
-    include "header.php";
 	$driver_id = $_SESSION['userId'];
 	$driver_name = $_SESSION['name'];
 ?>
