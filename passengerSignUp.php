@@ -9,13 +9,11 @@ include "header.php";
 
 $name = ($_POST['name']);
 $contactNo = ($_POST['contactNo']);
-<<<<<<< HEAD
 $password = $_POST['password'];
 $repeatPassword = $_POST['repeatPassword'];
-=======
+
 $password = md5($_POST['password']);
 $repeatPassword = md5($_POST['repeatPassword']);
->>>>>>> b52d2228db954b818016dc67d71d052b2bac16ff
 
 if($password != $repeatPassword){
     Print '<script>alert("Passwords do not match!");</script>'; // prompts user

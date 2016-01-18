@@ -278,7 +278,7 @@ session_start();
   <h2>Tabs</h2>               
   <ul class="nav nav-pills" role="tablist">
     <li class="active"><a href="#">Home</a></li>
-    <li><a href="seeRequest.php">See Driver Bids</a></li>     
+    <li><a href="seeBids.php">See Driver Bids</a></li>     
   </ul>
 </div>
 	<br>

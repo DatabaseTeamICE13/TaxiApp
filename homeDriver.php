@@ -2,6 +2,7 @@
 
 <?php
 	include "tableaccess.php";
+    include "header.php";
 	$driver_id = $_SESSION['userId'];
 	$driver_name = $_SESSION['name'];
 ?>
@@ -149,7 +150,7 @@
             <span class="icon-bar"></span>
           </button>
             <img src="Images/car.gif"  height="50" width="50">
-          <a class="navbar-brand" href="#">Taxi-App</a>
+          <a class="navbar-brand" href="#">Taxi-App Welcome <?php echo $_SESSION['name'] ?></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">

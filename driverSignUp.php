@@ -11,13 +11,12 @@ $id = ($_POST['id']);
 $name = ($_POST['name']);
 $contactNo = ($_POST['contactNo']);
 $nic = ($_POST['nic']);
-<<<<<<< HEAD
 $password = $_POST['password'];
 $repeatPassword = $_POST['repeatPassword'];
-=======
+
 $password = md5($_POST['password']);
 $repeatPassword = md5($_POST['repeatPassword']);
->>>>>>> b52d2228db954b818016dc67d71d052b2bac16ff
+
 $vehicleNo = ($_POST['vehicleNo']);
 $vehicleType = ($_POST['vehicleType']);
 $maxPassengers = ($_POST['maxPassengers']);
