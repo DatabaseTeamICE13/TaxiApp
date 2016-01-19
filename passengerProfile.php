@@ -19,7 +19,7 @@ session_start();
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
 	<style>
-			#bookTaxiUI, #refreshUI{
+			#bookTaxiUI, #hireRequestUI{
 		  background-color: #111;
 		  border: 2px solid #fff;
 		  border-radius: 3px;
@@ -45,7 +45,7 @@ session_start();
 		  
 		}
 
-		#bookTaxiText, #refreshText{
+		#bookTaxiText, #hireRequestText{
 		  color: rgb(255,255,255);
 		  font-family: Roboto,Arial,sans-serif;
 		  font-size: 18px;
@@ -62,7 +62,7 @@ session_start();
 		  padding-right: 5px;
 		}
 
-		#refreshUI,#distanceUI,#durationUI  {
+		#hireRequestUI,#distanceUI,#durationUI  {
 		  margin-left: 50px;
 		}
 	</style>
@@ -103,16 +103,16 @@ session_start();
 	  bookTaxiUI.appendChild(bookTaxiText);
 
 	  // Set CSS for the setCenter control border
-	  var refreshUI = document.createElement('div');
-	  refreshUI.id = 'refreshUI';
-	  refreshUI.title = 'Click to refresh the map';
-	  controlDiv.appendChild(refreshUI);
+	  var hireRequestUI = document.createElement('div');
+	  hireRequestUI.id = 'hireRequestUI';
+	  hireRequestUI.title = 'Click to refresh the map';
+	  controlDiv.appendChild(hireRequestUI);
 
 	  // Set CSS for the control interior
-	  var refreshText = document.createElement('div');
-	  refreshText.id = 'refreshText';
-	  refreshText.innerHTML = 'Refresh';
-	  refreshUI.appendChild(refreshText);
+	  var hireRequestText = document.createElement('div');
+	  hireRequestText.id = 'hireRequestText';
+	  hireRequestText.innerHTML = 'Refresh';
+	  hireRequestUI.appendChild(hireRequestText);
 
 	  // Set CSS for the control border
 	  var durationUI = document.createElement('div');
@@ -153,9 +153,8 @@ session_start();
 
   // Set up the click event listener for 'Set Center': Set the center of the
   // control to the current center of the map.
-  refreshUI.addEventListener('click', function() {
-    var newCenter = map.getCenter();
-    control.setCenter(newCenter);
+  durationUI.addEventListener('click', function() {
+    window.location.assign('');
   });
 }
 	function initialize() {
@@ -201,7 +200,6 @@ session_start();
 	  	google.maps.event.addListener(markerEnd, 'dragend', function() { calcRoute(markerStart.getPosition().lat(),markerStart.getPosition().lng(),markerEnd.getPosition().lat(),markerEnd.getPosition().lng()); } );
 		  markers.push(markerStart);
 		  markers.push(markerEnd);
-		  calcRoute(markerStart.getPosition().lat(),markerStart.getPosition().lng(),markerEnd.getPosition().lat(),markerEnd.getPosition().lng());
 	}
 	function calcRoute(startLat,startLong,endLat,endLong) {
         var start = new google.maps.LatLng(startLat, startLong);

@@ -94,4 +94,18 @@ function enableBid($driverId,$requestId){
     }
 }
 
+function getBidStatus($driverId,$requestId){
+    $query = mysql_query("SELECT hr.completed FROM hire_request hr,driverbid db WHERE  db.request_id = hr.request_id AND db.driver_id = '$driverId' AND hr.request_id ='$requestId' ");
+    $row = mysql_fetch_array($query);
+    if($row['completed'] == NULL){
+		return false;
+    }else{
+		if($row['completed'] == 1){
+			return true;
+		}else{
+			return false;
+		}
+    }
+}
+
 ?>
