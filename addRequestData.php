@@ -16,7 +16,7 @@ $distanceM=$_POST['distanceM'];
 $durationHrs=$_POST['durationHrs'];
 $durationMins=$_POST['durationMins'];
 $userId=$_SESSION['userId'];
-$SQLCheck="Select * from hire_request where date='$date' AND time='$time' AND contact_no='$userId'";
+$SQLCheck="SELECT * from hire_request where date='$date' AND time='$time' AND contact_no='$userId'";
 if(mysql_num_rows(mysql_query($SQLCheck))<=0){
 	$SQL = "INSERT INTO hire_request VALUES('$requestId','$startLong','$startLat','$endLong','$endLat','$date','$time','$noOfPassengers','$maxBid','$userId','$distanceKm','$distanceM','$durationHrs','$durationMins')";
 	mysql_query($SQL);
