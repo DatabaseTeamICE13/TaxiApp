@@ -57,6 +57,7 @@ session_start();
             </div>
         </div>
 
+
         <script>
             function validateNumber() {
                 var num = (document.getElementById("contactNo").value);

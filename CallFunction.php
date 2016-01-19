@@ -9,6 +9,6 @@
 	}else{
 		insertDriverBid($driver_id ,$requestId, $bid);
 	}
-	header("Location: homeDriver.php");
+	header("Location: myHires.php");
 ?>
 
